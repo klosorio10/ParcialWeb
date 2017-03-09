@@ -24,10 +24,13 @@ class App extends Component {
 
 
   getImages(keyword){
-    axios.get(URL+'/flickr/'+keyword+'red')
-    .then(function (response) {
-    this.state.imagesRed.concat(response.data);
-    console.log(response);
+    axios.get(URL+'/flickr/'+keyword+',red')
+    .then(function (response){
+    //  this.setState(() => {
+    //  this.state.imagesRed = response.data
+    //  }
+    //);
+    console.log(response.data);
     })
     .catch(function (error) {
     console.log(error);
@@ -38,7 +41,12 @@ class App extends Component {
   render() {
     return (
       <div>
+        <h1> Flickr Rainbow </h1>
+        <p> Search for something on Flickr and we will get you a rainbow  of it </p>
+        <br></br>
+        <div className="form-control">
               <input type="text" onChange={(evt) => this.getImages(evt.target.value)} />
+        </div>
       </div>
     );
   }
