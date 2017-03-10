@@ -4,9 +4,6 @@ class Image extends Component {
 
   constructor(props){
     super(props);
-    this.status={
-      saved:[]
-    }
   }
 
    getUrl(){
@@ -21,13 +18,12 @@ class Image extends Component {
        "_s.jpg";
    }
 
+
   render() {
     if(this.props.photo){
           return (
       <div>
-      <form action={this.save()}>
        <input type="image" src={this.getUrl()} alt="submit"/>
-       </form>
       </div>
     );
         }else {
