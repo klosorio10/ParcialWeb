@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Image from './components/image';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 const URL = 'http://localhost:9000'
@@ -18,14 +19,13 @@ class App extends Component {
       imagesGreen:[],
       imagesBlue:[],
       imagesIndigo:[],
-      imagesViolet:[],
-      saved:[]
+      imagesViolet:[]
     }
   }
 
 
   getImages(keyword){
-    axios.get(URL+'/flickr/'+keyword+',red')
+    axios.get(URL+'/flickr/'+keyword+' red')
     .then(response => {
       this.setState({
             imagesRed: response.data.photos.photo
@@ -35,7 +35,7 @@ class App extends Component {
     console.log(error);
     });
 
-        axios.get(URL+'/flickr/'+keyword+',orange')
+        axios.get(URL+'/flickr/'+keyword+' orange')
     .then(response => {
       this.setState({
             imagesOrange: response.data.photos.photo
@@ -45,7 +45,7 @@ class App extends Component {
     console.log(error);
     });
 
-        axios.get(URL+'/flickr/'+keyword+',yellow')
+        axios.get(URL+'/flickr/'+keyword+' yellow')
     .then(response => {
       this.setState({
             imagesYellow: response.data.photos.photo
@@ -55,7 +55,7 @@ class App extends Component {
     console.log(error);
     });
 
-        axios.get(URL+'/flickr/'+keyword+',green')
+        axios.get(URL+'/flickr/'+keyword+' green')
     .then(response => {
       this.setState({
             imagesGreen: response.data.photos.photo
@@ -65,7 +65,7 @@ class App extends Component {
     console.log(error);
     });
 
-            axios.get(URL+'/flickr/'+keyword+',blue')
+            axios.get(URL+'/flickr/'+keyword+' blue')
     .then(response => {
       this.setState({
             imagesBlue: response.data.photos.photo
@@ -75,7 +75,7 @@ class App extends Component {
     console.log(error);
     });
 
-            axios.get(URL+'/flickr/'+keyword+',indigo')
+            axios.get(URL+'/flickr/'+keyword+' indigo')
     .then(response => {
       this.setState({
             imagesIndigo: response.data.photos.photo
@@ -85,7 +85,7 @@ class App extends Component {
     console.log(error);
     });
 
-            axios.get(URL+'/flickr/'+keyword+',violet')
+            axios.get(URL+'/flickr/'+keyword+' violet')
     .then(response => {
       this.setState({
             imagesViolet: response.data.photos.photo
@@ -107,12 +107,12 @@ class App extends Component {
         <p> Search for something on Flickr and we will get you a rainbow  of it </p>
 
         <br></br>
-              <input type="text" className="form-control" placeholder="busca tu rainbow"/>
+              <input type="text" id="text" className="form-control" placeholder="busca tu rainbow"/>
               <br></br>
               <div className="row">
               <div className="col-md-2"></div>
              <div className="col-md-8">
-              <button className="btn btn-info btn-block " onClick={(evt)=>{this.getImages(evt.target.value)}}>
+              <button className="btn btn-info btn-block " onClick={(evt)=>{this.getImages(document.getElementById("text").value)}}>
               cargar fotos
               </button>
               </div>
@@ -131,7 +131,7 @@ class App extends Component {
               </div>
               <div className="col-md-1">
               {this.state.imagesOrange.map(imagen => {
-                return <input type="image" photo={imagen}/>
+                return <Image photo={imagen}/>
               })}
               </div>
               <div className="col-md-1">
