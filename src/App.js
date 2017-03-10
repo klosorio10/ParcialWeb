@@ -5,8 +5,6 @@ import Image from './components/image';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-const URL = 'http://localhost:9000'
-
 class App extends Component {
 
   constructor(props){
