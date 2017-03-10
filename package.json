@@ -1,5 +1,6 @@
 {
-  "name": "node_express_flickr",
+  "name": "Pacial_web",
+  "postinstall": "react-scripts build",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
