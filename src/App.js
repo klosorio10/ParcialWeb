@@ -25,7 +25,7 @@ class App extends Component {
 
 
   getImages(keyword){
-    axios.get(URL+'/flickr/'+keyword+' red')
+    axios.get('/flickr/'+keyword+' red')
     .then(response => {
       this.setState({
             imagesRed: response.data.photos.photo
@@ -35,7 +35,7 @@ class App extends Component {
     console.log(error);
     });
 
-        axios.get(URL+'/flickr/'+keyword+' orange')
+        axios.get('/flickr/'+keyword+' orange')
     .then(response => {
       this.setState({
             imagesOrange: response.data.photos.photo
@@ -45,7 +45,7 @@ class App extends Component {
     console.log(error);
     });
 
-        axios.get(URL+'/flickr/'+keyword+' yellow')
+        axios.get('/flickr/'+keyword+' yellow')
     .then(response => {
       this.setState({
             imagesYellow: response.data.photos.photo
@@ -55,7 +55,7 @@ class App extends Component {
     console.log(error);
     });
 
-        axios.get(URL+'/flickr/'+keyword+' green')
+        axios.get('/flickr/'+keyword+' green')
     .then(response => {
       this.setState({
             imagesGreen: response.data.photos.photo
@@ -65,7 +65,7 @@ class App extends Component {
     console.log(error);
     });
 
-            axios.get(URL+'/flickr/'+keyword+' blue')
+            axios.get('/flickr/'+keyword+' blue')
     .then(response => {
       this.setState({
             imagesBlue: response.data.photos.photo
@@ -75,7 +75,7 @@ class App extends Component {
     console.log(error);
     });
 
-            axios.get(URL+'/flickr/'+keyword+' indigo')
+            axios.get('/flickr/'+keyword+' indigo')
     .then(response => {
       this.setState({
             imagesIndigo: response.data.photos.photo
@@ -85,7 +85,7 @@ class App extends Component {
     console.log(error);
     });
 
-            axios.get(URL+'/flickr/'+keyword+' violet')
+            axios.get('/flickr/'+keyword+' violet')
     .then(response => {
       this.setState({
             imagesViolet: response.data.photos.photo
