@@ -18,7 +18,8 @@ class App extends Component {
       imagesGreen:[],
       imagesBlue:[],
       imagesIndigo:[],
-      imagesViolet:[]
+      imagesViolet:[],
+      saved:[]
     }
   }
 
@@ -63,12 +64,43 @@ class App extends Component {
     .catch(function (error) {
     console.log(error);
     });
+
+            axios.get(URL+'/flickr/'+keyword+',blue')
+    .then(response => {
+      this.setState({
+            imagesBlue: response.data.photos.photo
+        });
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+
+            axios.get(URL+'/flickr/'+keyword+',indigo')
+    .then(response => {
+      this.setState({
+            imagesIndigo: response.data.photos.photo
+        });
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+
+            axios.get(URL+'/flickr/'+keyword+',violet')
+    .then(response => {
+      this.setState({
+            imagesViolet: response.data.photos.photo
+        });
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
   }
 
 
   render() {
     return (
       <div>
+      <div className="row"> 
         <div className="col-md-2"></div>
         <div className="col-md-8">
         <h1> Flickr Rainbow </h1>
@@ -85,28 +117,53 @@ class App extends Component {
               </button>
               </div>
 
-              </div>
-              <div className="col-md-2">
+          </div>
+          </div>
+          <div className="col-md-2"></div>
+          </div>
+
+              <div className="row"> 
+              <div className="col-md-2"></div>   
+              <div className="col-md-1">
               {this.state.imagesRed.map(imagen => {
                 return <Image photo={imagen}/>
               })}
               </div>
-              <div className="col-md-2">
+              <div className="col-md-1">
               {this.state.imagesOrange.map(imagen => {
-                return <Image photo={imagen}/>
+                return <input type="image" photo={imagen}/>
               })}
               </div>
-              <div className="col-md-2">
+              <div className="col-md-1">
               {this.state.imagesYellow.map(imagen => {
                 return <Image photo={imagen}/>
               })}
               </div>
-              <div className="col-md-2">
+              <div className="col-md-1">
               {this.state.imagesGreen.map(imagen => {
                 return <Image photo={imagen}/>
               })}
               </div>
-        </div>
+              
+              <div className="col-md-1">
+              {this.state.imagesBlue.map(imagen => {
+                return <Image photo={imagen}/>
+              })}
+              </div>
+              
+              <div className="col-md-1">
+              {this.state.imagesIndigo.map(imagen => {
+                return <Image photo={imagen}/>
+              })}
+              </div>
+
+              <div className="col-md-1">
+              {this.state.imagesViolet.map(imagen => {
+                return <Image photo={imagen}/>
+              })}
+              </div>
+              </div>
+
       </div>
     );
   }
