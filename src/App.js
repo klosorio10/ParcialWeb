@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Image from './components/image';
 import axios from 'axios';
 
 const URL = 'http://localhost:9000'
@@ -11,8 +12,6 @@ class App extends Component {
     super(props);
     //"red","orange", "yellow", "green", "blue","indigo", "violet"
     this.state = {
-      urlsR:[],
-      prueba:['1','2','3','4'],
       imagesRed:[],
       imagesOrange:[],
       imagesYellow:[],
@@ -26,46 +25,88 @@ class App extends Component {
 
   getImages(keyword){
     axios.get(URL+'/flickr/'+keyword+',red')
-    .then(function (response){ () => {
+    .then(response => {
       this.setState({
             imagesRed: response.data.photos.photo
         });
-    },
-    console.log(response.data.photos.photo);
-    getURL();
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+
+        axios.get(URL+'/flickr/'+keyword+',orange')
+    .then(response => {
+      this.setState({
+            imagesOrange: response.data.photos.photo
+        });
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+
+        axios.get(URL+'/flickr/'+keyword+',yellow')
+    .then(response => {
+      this.setState({
+            imagesYellow: response.data.photos.photo
+        });
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+
+        axios.get(URL+'/flickr/'+keyword+',green')
+    .then(response => {
+      this.setState({
+            imagesGreen: response.data.photos.photo
+        });
     })
     .catch(function (error) {
     console.log(error);
     });
   }
 
-  getURL(){
-    var array = this.state.imagesRed;
-    var urls = [];
-    for(var i=0; i<array.length;i++){
-      var obj = array[i];
-      var farm = obj.farm;
-      var server = obj.server;
-      var secret = obj.secret;
-      var url ='https://farm'+farm+'.staticflickr.com/'+server+'/'+secret+'.jpg'
-      urls.push(url);
-    }
-    return urls;
-  }
-
 
   render() {
     return (
       <div>
+        <div className="col-md-2"></div>
+        <div className="col-md-8">
         <h1> Flickr Rainbow </h1>
         <p> Search for something on Flickr and we will get you a rainbow  of it </p>
-        <br></br>
-              <input type="text" className="form-control" placeholder="busca tu rainbow"
-              onChange={(evt) => this.getImages(evt.target.value)} />
 
-              <p>    {this.state.urlsR.map(function(urlsR, i) {
-                    return <h3 key={i}>{urlsR}</h3>
-              })}       </p>
+        <br></br>
+              <input type="text" className="form-control" placeholder="busca tu rainbow"/>
+              <br></br>
+              <div className="row">
+              <div className="col-md-2"></div>
+             <div className="col-md-8">
+              <button className="btn btn-info btn-block " onClick={(evt)=>{this.getImages(evt.target.value)}}>
+              cargar fotos
+              </button>
+              </div>
+
+              </div>
+              <div className="col-md-2">
+              {this.state.imagesRed.map(imagen => {
+                return <Image photo={imagen}/>
+              })}
+              </div>
+              <div className="col-md-2">
+              {this.state.imagesOrange.map(imagen => {
+                return <Image photo={imagen}/>
+              })}
+              </div>
+              <div className="col-md-2">
+              {this.state.imagesYellow.map(imagen => {
+                return <Image photo={imagen}/>
+              })}
+              </div>
+              <div className="col-md-2">
+              {this.state.imagesGreen.map(imagen => {
+                return <Image photo={imagen}/>
+              })}
+              </div>
+        </div>
       </div>
     );
   }

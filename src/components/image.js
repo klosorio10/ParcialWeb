@@ -4,28 +4,34 @@ class Image extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      url:''
-    }
   }
 
-  // postReds(){
-  //   this.state.imagesRed.map(function(imagesRed){
-  //   return (
-  //   <input type="image" src={imagesRed} alt="submit"/>
-  //   );
-  //   });
-  // }
+   getUrl(){
+       return "https://farm"+
+       this.props.photo.farm +
+       ".staticflickr.com/" +
+       this.props.photo.server +
+       "/"+
+       this.props.photo.id+
+       "_" +
+       this.props.photo.secret +
+       "_s.jpg";
+   }
 
   render() {
-    return (
+    if(this.props.photo){
+          return (
       <div>
-      <img src={this.props.url}/>
-      // <form action=guarda()>
-      //   {postReds()}
-      // </form>
+       <img src={this.getUrl()}/>
       </div>
     );
+        }else {
+          return (
+      <div>
+      </div>
+      );
+    }
+
   }
 }
 
