@@ -18,6 +18,19 @@
   font-size: large;
 }
 
+.fav{
+  background-color: gray;
+  align-content: center;
+  align-items: center;
+}
+
+.textFav{
+  background-color: gray;
+  text-align: center;
+  align-content: center;
+  color:white;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

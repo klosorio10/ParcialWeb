@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Image from './components/image';
+import Favoritas from './components/favoritas';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
@@ -17,12 +18,22 @@ class App extends Component {
       imagesGreen:[],
       imagesBlue:[],
       imagesIndigo:[],
-      imagesViolet:[]
+      imagesViolet:[],
+      favoritas:[]
     }
   }
 
 
   getImages(keyword){
+    //se inicializan
+    this.state.imagesRed=[]
+    this.state.imagesOrange=[]
+    this.state.imagesYellow=[]
+    this.state.imagesGreen=[]
+    this.state.imagesBlue=[]
+    this.state.imagesIndigo=[]
+    this.state.imagesViolet=[]
+
     axios.get('/flickr/'+keyword+' red')
     .then(response => {
       this.setState({
@@ -94,6 +105,12 @@ class App extends Component {
     });
   }
 
+  onChildChanged(fav){
+    var array = this.state.favoritas.slice()
+    array.push(fav)
+    this.setState({ favoritas : array });
+  }
+
 
   render() {
     return (
@@ -110,58 +127,68 @@ class App extends Component {
               <div className="row">
               <div className="col-md-2"></div>
              <div className="col-md-8">
-              <button className="btn btn-info btn-block " onClick={(evt)=>{this.getImages(document.getElementById("text").value)}}>
-              cargar fotos
+              <button className="btn btn-info btn-block" onClick={(evt)=>{this.getImages(document.getElementById("text").value)}}>
+              Load rainbow
               </button>
               </div>
-
           </div>
           </div>
           <div className="col-md-2"></div>
           </div>
-
+          <br></br>
+          <br></br>
+              <div className="row textFav">
+              <p>  </p>
+              <p> you can select your favorite photos </p>
+              </div>
+              <br></br>
+              <br></br>
               <div className="row"> 
               <div className="col-md-2"></div>   
               <div className="col-md-1">
               {this.state.imagesRed.map(imagen => {
-                return <Image photo={imagen}/>
+                return <Image photo={imagen} callbackParent={(url) => this.onChildChanged(url) }/>
               })}
               </div>
               <div className="col-md-1">
               {this.state.imagesOrange.map(imagen => {
-                return <Image photo={imagen}/>
+                return <Image photo={imagen} callbackParent={(url) => this.onChildChanged(url) }/>
               })}
               </div>
               <div className="col-md-1">
               {this.state.imagesYellow.map(imagen => {
-                return <Image photo={imagen}/>
+                return <Image photo={imagen} callbackParent={(url) => this.onChildChanged(url) }/>
               })}
               </div>
               <div className="col-md-1">
               {this.state.imagesGreen.map(imagen => {
-                return <Image photo={imagen}/>
+                return <Image photo={imagen} callbackParent={(url) => this.onChildChanged(url) }/>
               })}
               </div>
               
               <div className="col-md-1">
               {this.state.imagesBlue.map(imagen => {
-                return <Image photo={imagen}/>
+                return <Image photo={imagen} callbackParent={(url) => this.onChildChanged(url) }/>
               })}
               </div>
               
               <div className="col-md-1">
               {this.state.imagesIndigo.map(imagen => {
-                return <Image photo={imagen}/>
+                return <Image photo={imagen} callbackParent={(url) => this.onChildChanged(url) }/>
               })}
               </div>
 
               <div className="col-md-1">
               {this.state.imagesViolet.map(imagen => {
-                return <Image photo={imagen}/>
+                return <Image photo={imagen} callbackParent={(url) => this.onChildChanged(url) }/>
+              })}
+              </div>
+              <div className="col-md-1 fav">
+              {this.state.favoritas.map(text => {
+                return <Favoritas url={text}/>
               })}
               </div>
               </div>
-
       </div>
     );
   }
